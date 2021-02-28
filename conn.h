@@ -46,14 +46,14 @@ int conn::read()
 string conn::read_buffer()
 {
     string s(input_->retrieve_all_as_string());
-    cout << "read******"<< s.data() << endl;
+    //cout << "read******"<< s.data() << endl;
     return s;
 }
 
 string conn::write_buffer()
 {
     string s(output_->retrieve_all_as_string());
-    cout << "write ******"<<s.data() << endl;
+    //cout << "write ******"<<s.data() << endl;
     return s;
 }
 

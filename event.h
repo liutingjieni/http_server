@@ -94,7 +94,8 @@ void event::call_epollin(int fd)
 
         //在conn_list(所有连接map)找到所对应根据key(fd) 
         task_.conn_ = conn;
-        threadpool.push_back(task_);
+        task_.callback_(conn);
+        //threadpool.push_back(task_);
     }
 }
 
@@ -103,18 +104,18 @@ void event::call_epollout(int fd)
     shared_ptr<conn> conn = conn_list[fd];
     string s(conn->write_buffer());
     const char *data = s.data();
-    cout << "#############"  << " "<< fd << " "<< strlen(data)<< endl;
+    //cout << "#############"  << " "<< fd << " "<< strlen(data)<< endl;
     int n = write(fd, data, strlen(data));
     if(!conn->get_linger()) {
-        cout << "del^^^^^^^^^^^^^^^^^^^^^^" << endl;
+        //cout << "del^^^^^^^^^^^^^^^^^^^^^^" << endl;
         epoll_del_(fd);
         wheel.del_timer(conn);
         conn_list.erase(fd);
         close(fd);
-        cout << "del &&&&&&&&&&&&&&&&&&&&" << endl;
+        //cout << "del &&&&&&&&&&&&&&&&&&&&" << endl;
     }
     else {
-        cout << "mod^^^^^^^^^^^^^^^^^^^^^^" << endl;
+        //cout << "mod^^^^^^^^^^^^^^^^^^^^^^" << endl;
         fd_read(fd);
         epoll_mod_(fd);        
     }
