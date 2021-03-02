@@ -1,28 +1,28 @@
-### http_server
+## http_server
 
-#### 项目概述
+### 项目概述
 
-1. 介绍
+#### 1. 介绍
 
    本项目是一个实现了GET基本请求解析与处理的web服务器, 采用C++11编写.
 
-2. 实现
+####2. 实现
 
-   - 概述
+   - **概述**
      基于事件驱动模型, 采用Reactor+ IO multiplexing(epoll) + 非阻塞 + 线程池的设计, 当epoll_wait检测到活跃事件后, 将事件放入线程池的事件队列中 , 由线程池的某个线程负责处理 
                   ![image](https://github.com/liutingjieni/http_server/blob/master/reactor.png)
 
      
 
-   - 具体实现
+   - **具体实现**
 
-     - http状态机
+     - **http状态机**
 
-     - 定时器:
+     - **定时器**:
 
         应用于心跳机制, 使用时间轮定时容器, 添加删除时间复杂度均为O(1)
 
-     - 高性能Buffer类: 
+     - **高性能Buffer类**: 
 
           Buffer类的实现:
           
@@ -32,32 +32,32 @@
 
        利用了临时栈上空间, 避免每个连接的初始化Buffer过大造成的内存浪费, 也避免反复调用read()的系统开销
 
-     - 统一事件源:  
+     - **统一事件源**:  
          将所有事件集中起来统一处理, 包括IO事件, 时间事件等
 
-     - 使用RAII的机制进行对象生命周期控制, 内存分配大多使用智能指针
-
-     - 使用非阻塞套接字原因:
+     - **使用非阻塞套接字原因**:
          
          IO多路复用一般不能和blocking IO用在一起, 因为blocking IO中read/write/accept/connect都有可能阻塞当前进程, 这样线程就没办法处理其他socket上的IO事件
 
      - 基于对象编程, 项目代码结构清晰明白, 模块之间耦合度低.
+     - 使用RAII的机制进行对象生命周期控制, 内存分配大多使用智能指针
 
-3. 开发环境及使用工具
 
-   - 开发环境: deepin 15.9 x86_64
-   - 开发工具: vim gcc编辑器
+##### 3. 开发环境及使用工具
 
-4. 使用说明
+   - **开发环境**: deepin 15.9 x86_64
+   - **开发工具**: vim gcc编辑器
 
-   - 安装说明
+##### 4. 使用说明
+
+   - **安装说明**
 
        ```
        git clone git@github.com:liutingjieni/http_server.git
        cd http_server
        ```
 
-   - 使用说明
+   - **使用说明**
 
        ```
        g++ main.cpp -lpthread
