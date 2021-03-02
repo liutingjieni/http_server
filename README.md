@@ -43,15 +43,15 @@
    - 安装说明
 
        ```
-       git clone
+       git clone git@github.com:liutingjieni/http_server.git
        cd http_server
        ```
 
    - 使用说明
 
        ```
-       g++ main.cpp
-       ./a.out -lpthread
+       g++ main.cpp -lpthread
+       ./a.out 
        ```
 
        
