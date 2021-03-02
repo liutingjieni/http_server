@@ -23,6 +23,7 @@
         应用于心跳机制, 使用时间轮定时容器, 添加删除时间复杂度均为O(1)
 
      - 高性能Buffer类: 
+
           Buffer类的实现:
           
           ![image](https://github.com/liutingjieni/http_server/blob/master/buffer.png)
@@ -31,12 +32,14 @@
 
        利用了临时栈上空间, 避免每个连接的初始化Buffer过大造成的内存浪费, 也避免反复调用read()的系统开销
 
-     - 统一事件源:  将所有事件集中起来统一处理, 包括IO事件, 时间事件等
+     - 统一事件源:  
+         将所有事件集中起来统一处理, 包括IO事件, 时间事件等
 
      - 使用RAII的机制进行对象生命周期控制, 内存分配大多使用智能指针
 
      - 使用非阻塞套接字原因:
-       IO多路复用一般不能和blocking IO用在一起, 因为blocking IO中read/write/accept/connect都有可能阻塞当前进程, 这样线程就没办法处理其他socket上的IO事件
+         
+         IO多路复用一般不能和blocking IO用在一起, 因为blocking IO中read/write/accept/connect都有可能阻塞当前进程, 这样线程就没办法处理其他socket上的IO事件
 
      - 基于对象编程, 项目代码结构清晰明白, 模块之间耦合度低.
 
@@ -60,7 +63,3 @@
        g++ main.cpp -lpthread
        ./a.out 
        ```
-
-       
-
-   
