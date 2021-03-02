@@ -23,6 +23,8 @@
         应用于心跳机制, 使用时间轮定时容器, 添加删除时间复杂度均为O(1)
 
      - 高性能Buffer类: 
+          Buffer类的实现:
+          
           ![image](https://github.com/liutingjieni/http_server/blob/master/buffer.png)
 
        在栈上准备一个65536字节的extrabuf, 然后利用readv()来读取数据, iovec有两块, 第一块指向Buffer中的writable, 另一块指向栈上的extrabuf. 这样, 如果读入的数据不多, 那么全部都读到Buffer中, 如果长度超过Buffer的writable字节数, 就会读到栈上的extrabuf里, 然后再把extrabuf里的数据append()到Buffer中
@@ -33,7 +35,8 @@
 
      - 使用RAII的机制进行对象生命周期控制, 内存分配大多使用智能指针
 
-     - 使用非阻塞套接字
+     - 使用非阻塞套接字原因:
+       IO多路复用一般不能和blocking IO用在一起, 因为blocking IO中read/write/accept/connect都有可能阻塞当前进程, 这样线程就没办法处理其他socket上的IO事件
 
      - 基于对象编程, 项目代码结构清晰明白, 模块之间耦合度低.
 
