@@ -46,8 +46,7 @@ Threadpool<T>::Threadpool(int num) : numthreads(num)
 
         }
         if (pthread_detach(threads[i])) {
-            delete []threads;
-        
+            delete threads[i];
         }
     }
 }

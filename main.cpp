@@ -9,6 +9,7 @@
 #include "event.h"
 #include <string.h>
 #include "http.h"
+#include <mcheck.h>
 using namespace std;
 using std::placeholders::_1;
 
@@ -31,7 +32,9 @@ void onmessage(shared_ptr<conn> conn_)
 
 int main()
 {
+    mtrace();
     event_->set_mess_callback(bind(onmessage, _1));
     event_->loop();
+    muntrace();
     delete event_;
 }

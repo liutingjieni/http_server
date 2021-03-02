@@ -317,6 +317,7 @@ bool http::add_response(const char *format, ...)
     int len = vsnprintf(t_buffer, 512, format, arg_list);
     va_end(arg_list);
     conn_->output_->append(t_buffer, strlen(t_buffer));
+    free(t_buffer);
     return true;
 
 }
