@@ -32,9 +32,10 @@ void onmessage(shared_ptr<conn> conn_)
 
 int main()
 {
-    mtrace();
+    //内存泄露
+    //mtrace(); 
     event_->set_mess_callback(bind(onmessage, _1));
     event_->loop();
-    muntrace();
+    //muntrace();
     delete event_;
 }
