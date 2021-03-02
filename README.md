@@ -10,7 +10,7 @@
 
    - 概述
      基于事件驱动模型, 采用Reactor+ IO multiplexing(epoll) + 非阻塞 + 线程池的设计, 当epoll_wait检测到活跃事件后, 将事件放入线程池的事件队列中 , 由线程池的某个线程负责处理 
-                  ![image](https://github.com/liutingjieni/http_server/blob/master/20200511162126793.png)
+                  ![image](https://github.com/liutingjieni/http_server/blob/master/reactor.png)
 
      
 
@@ -23,6 +23,7 @@
         应用于心跳机制, 使用时间轮定时容器, 添加删除时间复杂度均为O(1)
 
      - 高性能Buffer类: 
+          ![image](https://github.com/liutingjieni/http_server/blob/master/buffer.png)
 
        在栈上准备一个65536字节的extrabuf, 然后利用readv()来读取数据, iovec有两块, 第一块指向Buffer中的writable, 另一块指向栈上的extrabuf. 这样, 如果读入的数据不多, 那么全部都读到Buffer中, 如果长度超过Buffer的writable字节数, 就会读到栈上的extrabuf里, 然后再把extrabuf里的数据append()到Buffer中
 
