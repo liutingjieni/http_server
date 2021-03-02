@@ -10,7 +10,7 @@
 
    - 概述
      基于事件驱动模型, 采用Reactor+ IO multiplexing(epoll) + 非阻塞 + 线程池的设计, 当epoll_wait检测到活跃事件后, 将事件放入线程池的事件队列中 , 由线程池的某个线程负责处理 
-                  ![image]https://github.com/liutingjieni/http_server/blob/master/20200511162126793.png(https://github.com/liutingjieni/http_server/blob/master/20200511162126793.png)
+                  ![image](https://github.com/liutingjieni/http_server/blob/master/20200511162126793.png)
 
    - 具体实现
 
